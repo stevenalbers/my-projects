@@ -3,17 +3,17 @@
 #include <random>
 #include <fstream>
 
-struct family
+struct person
 {
-	std::string member[10];
-	int size = 0;
-	int id[10] = 0;
+	std::string firstName;
+	std::string lastName;
+	int id = 0;
+	bool picked = false;
 };
 
-bool randomizeSecretSanta(int memberCount);
+bool randomizeSecretSanta(person list[], int memberCount);
 
-family findMember(int inputId);
-
+bool matchSanta(person &lhs, person rhs);
 
 int main()
 {
@@ -22,57 +22,50 @@ int main()
 
 	
 	// variables
-	family Albers;
-	family Lansang;
-	family Fremont;
+	person santaList[80];
 	std::fstream albersFile("albers.txt");
 	std::fstream lansangFile("lansang.txt");
 	std::fstream fremontFile("fremont.txt");
 	
+	int count = 0;
+	
+	bool successfulRandomize = false;
 
 	std::string name;
 	
 	int i=0;
-	int j=0;
 	while(std::getline(albersFile, name))
 	{
-		Albers.member[i] = name;
-		Albers.id[i] = j;
+		santaList[i].firstName = name;
+		santaList[i].lastName = "Albers";
 
 		i++;
-		j++;
 	}
-	Albers.size = i;
 	
-	i=0;
 	while(std::getline(lansangFile, name))
 	{
-		Lansang.member[i] = name;
-		Lansang.id[i] = j;
+		santaList[i].firstName = name;
+		santaList[i].lastName = "Lansang";
 
 		i++;
-		j++;
 	}
-	Lansang.size = i;
 	
-	i=0;
 	while(std::getline(fremontFile, name))
 	{
-		Fremont.member[i] = name;
-		Fremont.id[i] = j;
+		santaList[i].firstName = name;
+		santaList[i].lastName = "Fremont";
 
 		i++;
-		j++;
 	}
-	Fremont.size = i;
 
-	
+	count = i;
 		
+	successfulRandomize = randomizeSecretSanta(santaList, count);
 	
-return 0;
+return successfulRandomize;
 }
 
-bool randomizeSecretSanta(int memberCount)
+bool randomizeSecretSanta(person list[], int memberCount)
 {
 	// variables
 	std::ofstream output("output.txt", std::ofstream::out);
@@ -84,25 +77,34 @@ bool randomizeSecretSanta(int memberCount)
 		// randomize a potential secret santee
 		randInt = rand() % memberCount;
 
-		// match id to member
+		// loop until this person is matched
+		while(list[randInt].picked == false)
+		{
+			if(!matchSanta(list[randInt], list[i]))
+			{
+				randInt = rand() % memberCount;
 
-		
+			}
+			else
+			{
+				output << list[i].firstName << " has " << list[randInt].firstName << std::endl;
+
+			}
+		}
 		// if the member with that id is of the same family or already selected, try again
+		
 	}
 		
 	
 	return false;
 }
 
-family findMember(int inputId)
+bool matchSanta(person &lhs, person rhs)
 {
-	// loop through each family
-	for(int i = 0; i < Albers.size; i++)
+	if(lhs.lastName != rhs.lastName && lhs.picked == false)
 	{
-		if( inputId == i)
-		{
-			return i;
-		}
+		lhs.picked == true;
 	}
+	return lhs.picked;
 }
 

@@ -8,7 +8,8 @@ struct person
 	std::string firstName;
 	std::string lastName;
 	int id = 0;
-	bool picked = false;
+	bool isSanta = false;
+	bool hasSanta = false;
 };
 
 bool randomizeSecretSanta(person list[], int memberCount);
@@ -78,7 +79,7 @@ bool randomizeSecretSanta(person list[], int memberCount)
 		randInt = rand() % memberCount;
 
 		// loop until this person is matched
-		while(list[randInt].picked == false)
+		while(!list[i].isSanta)
 		{
 			if(!matchSanta(list[randInt], list[i]))
 			{
@@ -88,7 +89,7 @@ bool randomizeSecretSanta(person list[], int memberCount)
 			else
 			{
 				output << list[i].firstName << " has " << list[randInt].firstName << std::endl;
-
+				list[i].isSanta = true;
 			}
 		}
 		// if the member with that id is of the same family or already selected, try again
@@ -101,10 +102,12 @@ bool randomizeSecretSanta(person list[], int memberCount)
 
 bool matchSanta(person &lhs, person rhs)
 {
-	if(lhs.lastName != rhs.lastName && lhs.picked == false)
+	if(lhs.lastName != rhs.lastName && lhs.hasSanta == false)
 	{
-		lhs.picked == true;
+		lhs.hasSanta = true;
+		return true;
 	}
-	return lhs.picked;
+	
+	return false;
 }
 

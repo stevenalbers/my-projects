@@ -16,6 +16,8 @@ bool randomizeSecretSanta(person list[], int memberCount);
 
 bool matchSanta(person &lhs, person rhs);
 
+void populateSantaList(person list[], std::string inputFile, std::string surname, int& iterator);
+
 int main()
 {
 	// initialize random number generator
@@ -24,40 +26,20 @@ int main()
 	
 	// variables
 	person santaList[80];
-	std::fstream albersFile("albers.txt");
-	std::fstream lansangFile("lansang.txt");
-	std::fstream fremontFile("fremont.txt");
 	
 	int count = 0;
 	
 	bool successfulRandomize = false;
 
-	std::string name;
 	
 	int i=0;
-	while(std::getline(albersFile, name))
-	{
-		santaList[i].firstName = name;
-		santaList[i].lastName = "Albers";
 
-		i++;
-	}
-	
-	while(std::getline(lansangFile, name))
-	{
-		santaList[i].firstName = name;
-		santaList[i].lastName = "Lansang";
-
-		i++;
-	}
-	
-	while(std::getline(fremontFile, name))
-	{
-		santaList[i].firstName = name;
-		santaList[i].lastName = "Fremont";
-
-		i++;
-	}
+	populateSantaList(santaList, "albers.txt", "Albers", i);
+	populateSantaList(santaList, "lansang.txt", "Lansang", i);
+	populateSantaList(santaList, "fremont.txt", "Fremont", i);
+	populateSantaList(santaList, "dipierro.txt", "DiPierro", i);
+	populateSantaList(santaList, "novato.txt", "Novato", i);
+	populateSantaList(santaList, "pacifica.txt", "Pacifica", i);
 
 	count = i;
 		
@@ -111,3 +93,15 @@ bool matchSanta(person &lhs, person rhs)
 	return false;
 }
 
+void populateSantaList(person list[], std::string inputFile, std::string surname, int& iterator)
+{
+	std::fstream famFile(inputFile);
+	std::string tempName;
+	while(std::getline(famFile, tempName))
+	{
+		list[iterator].firstName = tempName;
+		list[iterator].lastName = surname;
+
+		iterator++;
+	}
+}

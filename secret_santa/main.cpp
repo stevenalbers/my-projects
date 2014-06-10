@@ -34,12 +34,12 @@ int main()
 	
 	int i=0;
 
-	populateSantaList(santaList, "albers.txt", "Albers", i);
-	populateSantaList(santaList, "lansang.txt", "Lansang", i);
-	populateSantaList(santaList, "fremont.txt", "Fremont", i);
-	populateSantaList(santaList, "dipierro.txt", "DiPierro", i);
-	populateSantaList(santaList, "novato.txt", "Novato", i);
-	populateSantaList(santaList, "pacifica.txt", "Pacifica", i);
+	populateSantaList(santaList, "resources/albers.txt", "Albers", i);
+	populateSantaList(santaList, "resources/lansang.txt", "Lansang", i);
+	populateSantaList(santaList, "resources/fremont.txt", "Fremont", i);
+	populateSantaList(santaList, "resources/dipierro.txt", "DiPierro", i);
+	populateSantaList(santaList, "resources/novato.txt", "Novato", i);
+	populateSantaList(santaList, "resources/pacifica.txt", "Pacifica", i);
 
 	count = i;
 		

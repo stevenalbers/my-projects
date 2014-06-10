@@ -1,0 +1,17 @@
+Brian has Paul
+Thera has Andrea
+Mark has Annamae
+Debbie has Nick
+Steven has Samantha
+Christine has Jessica
+Francis has Debbie
+Oliver has Brian
+Andrea has Francis
+Sarah has Jeremy
+SJ has Mark
+Paul has Steven
+Annamae has Thera
+Nick has Sarah
+Samantha has Christine
+Jessica has Oliver
+Jeremy has SJ
